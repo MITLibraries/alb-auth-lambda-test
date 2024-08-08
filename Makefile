@@ -22,11 +22,7 @@ update: install # Update Python dependencies
 ######################
 
 test: # Run tests and print a coverage report
-	pipenv run coverage run --source=lambdas -m pytest -vv
-	pipenv run coverage report -m
-
-coveralls: test # Write coverage data to an LCOV report
-	pipenv run coverage lcov -o ./coverage/lcov.info
+	pipenv run pytest -vv
 
 ####################################
 # Code quality and safety commands
