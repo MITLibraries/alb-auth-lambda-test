@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-sentry-sdk = "*"
+requests = "*"
+pyjwt = {extras = ["crypto"], version = "*"}
+ipython = "*"
 
 [dev-packages]
 black = "*"
@@ -15,4 +17,4 @@ pytest = "*"
 ruff = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.12"
