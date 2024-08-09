@@ -43,6 +43,7 @@ def lambda_handler(event, context):
             {
                 "request_headers": event.get("headers", "No headers found..."),
                 "oidc_data": oidc_data,
+                "oidc_access_token":"Currently not parsing...",
                 "error": error,
             }
         ),
