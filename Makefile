@@ -63,6 +63,16 @@ black-apply: # Apply changes with 'black'
 ruff-apply: # Resolve 'fixable errors' with 'ruff'
 	pipenv run ruff check --fix .
 
+####################################
+# Convenience
+####################################
+
+docker-run:
+	docker run -e WORKSPACE=dev -p 9000:8080 $(ECR_NAME_DEV):latest
+
+####################################
+# Terraform
+####################################
 
 ### Terraform-generated Developer Deploy Commands for Dev environment ###
 dist-dev: ## Build docker container (intended for developer-based manual build)

@@ -15,13 +15,13 @@
 - Build the container:
 
   ```bash
-  docker build -t alb-auth-lambda-test:latest .
+  make dist-dev
   ```
 
 - Run the default handler for the container:
 
   ```bash
-  docker run -e WORKSPACE=dev -p 9000:8080 alb-auth-lambda-test:latest
+  make docker-run
   ```
 
 - Use a utility function to simulate a stripped down event passed to the lambda that contains authentication headers we are expecting:
