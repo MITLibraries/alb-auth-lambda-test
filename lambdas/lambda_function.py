@@ -4,7 +4,7 @@
 import json
 import time
 
-from lambdas.utils import parse_oidc_data
+from lambdas.utils import parse_oidc_data, prepare_logout_response
 
 REGION = "us-east-1"
 
@@ -19,6 +19,9 @@ def lambda_handler(event, context):
         - are there parts of this we can cache?
     """
     print(json.dumps(event))
+
+    if event.get("path") == "/trigger-logout":
+        return prepare_logout_response()
 
     error = None
     oidc_data = None

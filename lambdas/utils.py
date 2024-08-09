@@ -41,3 +41,29 @@ def simulate(event):
         return json.loads(response.json()["body"])
     except:
         return response.content
+
+
+def prepare_logout_response():
+    return {
+        "isBase64Encoded": False,
+        "statusCode": 200,
+        "statusDescription": "200 OK",
+        "headers": {
+            "Set-cookie": "AWSALBAuthNonce=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 "
+            "GMT\nAWSELBAuthSessionCookie-oidc-poc-0=; Path=/; "
+            "Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+            "Content-Type": "application/json",
+        },
+        "body": json.dumps(
+            {
+                "msg": "logout successful",
+                "details": "Cookies `AWSALBAuthNonce` and "
+                "`AWSELBAuthSessionCookie-oidc-poc-0` have been manually "
+                "expired, meaning you are logged out of THIS "
+                "application.  But your session remains active with "
+                "Touchstone Okta.  Therefore a refresh of the restricted "
+                "page will work, after a slight delay, as the ALB "
+                "re-sets the logged in cookies for this domain.",
+            }
+        ),
+    }
