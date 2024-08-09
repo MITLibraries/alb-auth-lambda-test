@@ -2,6 +2,7 @@
 # ruff: noqa
 
 import json
+import time
 
 from lambdas.utils import parse_oidc_data
 
@@ -26,6 +27,7 @@ def lambda_handler(event, context):
     # supports parsing an expired signature, e.g. {'verify_exp': False}
     options = event.get("jwt_parse_options")
 
+    t0 = time.time()
     try:
         oidc_data = parse_oidc_data(
             event["headers"]["x-amzn-oidc-data"],
@@ -33,6 +35,7 @@ def lambda_handler(event, context):
         )
     except Exception as exc:
         error = exc
+    parse_elapsed = time.time()-t0
 
     return {
         "isBase64Encoded": False,
@@ -45,6 +48,7 @@ def lambda_handler(event, context):
                 "oidc_data": oidc_data,
                 "oidc_access_token":"Currently not parsing...",
                 "error": error,
+                "parse_elapsed":parse_elapsed
             }
         ),
     }
