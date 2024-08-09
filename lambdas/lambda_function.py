@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         )
     except Exception as exc:
         error = exc
-    parse_elapsed = time.time()-t0
+    parse_elapsed = time.time() - t0
 
     return {
         "isBase64Encoded": False,
@@ -44,11 +44,11 @@ def lambda_handler(event, context):
         "headers": {"Set-cookie": "cookies", "Content-Type": "application/json"},
         "body": json.dumps(
             {
-                "request_headers": event.get("headers", "No headers found..."),
+                "lambda_event": event,
                 "oidc_data": oidc_data,
-                "oidc_access_token":"Currently not parsing...",
+                "oidc_access_token": "Currently not parsing...",
                 "error": error,
-                "parse_elapsed":parse_elapsed
+                "parse_elapsed": parse_elapsed,
             }
         ),
     }
